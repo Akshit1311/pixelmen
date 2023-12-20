@@ -20,6 +20,7 @@
   }
 }
 
+html,
 body {
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(
@@ -35,4 +36,11 @@ body {
   height: 100vh;
   overflow: hidden;
   margin: 0;
+}
+
+canvas {
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: -webkit-crisp-edges;
 }

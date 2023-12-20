@@ -1,5 +1,6 @@
 "use client";
 
+import RenderLevel from "@/components/RenderLevel";
 import Sprite from "@/components/Sprite";
 import { SPRITE_SHEET_SRC } from "@/constants";
 import Image from "next/image";
@@ -17,10 +18,5 @@ export default function Home() {
 
   if (!spriteSheetImage) return <div>Loading...</div>;
 
-  return (
-    <div>
-      <Sprite image={spriteSheetImage} frameCoord="1x0" />
-      <Sprite image={spriteSheetImage} frameCoord="0x2" />
-    </div>
-  );
+  return <RenderLevel spriteSheetImage={spriteSheetImage} />;
 }
