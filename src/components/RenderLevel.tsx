@@ -1,6 +1,12 @@
 import React from "react";
 import Sprite, { TFrameCoord } from "./Sprite";
-import { CELL_SIZE } from "@/constants";
+import {
+  CELL_SIZE,
+  LEVEL_THEMES,
+  THEME_BACKGROUNDS,
+  TLevelTheme,
+} from "@/constants";
+import LevelBgTilesLayer from "./LevelBgTilesLayer";
 
 type Props = {
   spriteSheetImage: HTMLImageElement;
@@ -13,8 +19,19 @@ type TBlock = {
   frameCoord: TFrameCoord;
 };
 
+export type TLevel = {
+  theme: TLevelTheme;
+  tilesHeight: number;
+  tilesWidth: number;
+  placements: TBlock[];
+};
+
 const RenderLevel = ({ spriteSheetImage }: Props) => {
   const level = {
+    theme: LEVEL_THEMES.YELLOW,
+    tilesHeight: 10,
+    tilesWidth: 10,
+
     placements: [
       // "Level 0"
       // { id: 0, x: 0, y: 0, frameCoord: "0x2" },
@@ -59,13 +76,20 @@ const RenderLevel = ({ spriteSheetImage }: Props) => {
   };
 
   return (
-    <div className="absolute inset-0 grid place-items-center">
+    <div
+      className="absolute inset-0 grid place-items-center"
+      style={{
+        backgroundColor: THEME_BACKGROUNDS[level.theme],
+      }}
+    >
       {/* Game Screen */}
       <div
         className={
-          "h-44 w-44 outline outline-red-500 scale-[2] md:scale-[3] lg:scale-[3.5] xl:scale-[3.75] 2xl:scale-[4]"
+          "h-44 w-44 scale-[2] md:scale-[3] lg:scale-[3.5] xl:scale-[3.75] 2xl:scale-[4]"
         }
       >
+        <LevelBgTilesLayer level={level} image={spriteSheetImage} />
+
         {level.placements.map(({ id, x, y, frameCoord }, ix) => {
           const xCoord = `${x * CELL_SIZE}px`;
           const yCoord = `${y * CELL_SIZE}px`;
@@ -80,7 +104,6 @@ const RenderLevel = ({ spriteSheetImage }: Props) => {
             </span>
           );
         })}
-        <Sprite image={spriteSheetImage} frameCoord="1x2" />
       </div>
     </div>
   );

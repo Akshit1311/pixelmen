@@ -1,7 +1,9 @@
 import { CELL_SIZE } from "@/constants";
 import React, { useEffect, useRef } from "react";
 
-export type TFrameCoord = `${number}x${number}`;
+// TODO: fix this type
+// export type TFrameCoord = `${number}x${number}`;
+export type TFrameCoord = string;
 
 type Props = {
   image: CanvasImageSource;
