@@ -1,9 +1,11 @@
 import { CELL_SIZE } from "@/constants";
 import React, { useEffect, useRef } from "react";
 
+export type TFrameCoord = `${number}x${number}`;
+
 type Props = {
   image: CanvasImageSource;
-  frameCoord: `${number}x${number}`;
+  frameCoord: TFrameCoord;
   size?: number;
 }; // "XxY" where X and Y are coords
 
