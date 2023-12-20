@@ -6,10 +6,9 @@ type Props = {
   x: number;
   y: number;
   frameCoord: TFrameCoord;
-  image: CanvasImageSource;
 };
 
-const MapCell = ({ x, y, frameCoord, image }: Props) => {
+const MapCell = ({ x, y, frameCoord }: Props) => {
   return (
     <div
       className="absolute"
@@ -18,7 +17,7 @@ const MapCell = ({ x, y, frameCoord, image }: Props) => {
         top: y * CELL_SIZE,
       }}
     >
-      <Sprite image={image} frameCoord={frameCoord} />
+      <Sprite frameCoord={frameCoord} />
     </div>
   );
 };

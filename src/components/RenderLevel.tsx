@@ -7,10 +7,9 @@ import {
   TLevelTheme,
 } from "@/constants";
 import LevelBgTilesLayer from "./LevelBgTilesLayer";
+import LevelPlacementsLayer from "./LevelPlacementsLayer";
 
-type Props = {
-  spriteSheetImage: HTMLImageElement;
-};
+type Props = {};
 
 type TBlock = {
   id: number;
@@ -26,7 +25,7 @@ export type TLevel = {
   placements: TBlock[];
 };
 
-const RenderLevel = ({ spriteSheetImage }: Props) => {
+const RenderLevel = ({}: Props) => {
   const level = {
     theme: LEVEL_THEMES.YELLOW,
     tilesHeight: 10,
@@ -88,22 +87,9 @@ const RenderLevel = ({ spriteSheetImage }: Props) => {
           "h-44 w-44 scale-[2] md:scale-[3] lg:scale-[3.5] xl:scale-[3.75] 2xl:scale-[4]"
         }
       >
-        <LevelBgTilesLayer level={level} image={spriteSheetImage} />
+        <LevelBgTilesLayer level={level} />
 
-        {level.placements.map(({ id, x, y, frameCoord }, ix) => {
-          const xCoord = `${x * CELL_SIZE}px`;
-          const yCoord = `${y * CELL_SIZE}px`;
-          const transform = `translate(${xCoord}, ${yCoord})`;
-
-          return (
-            <span key={id} className="absolute" style={{ transform }}>
-              <Sprite
-                image={spriteSheetImage}
-                frameCoord={frameCoord as TFrameCoord}
-              />
-            </span>
-          );
-        })}
+        <LevelPlacementsLayer level={level} />
       </div>
     </div>
   );

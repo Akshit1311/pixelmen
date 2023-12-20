@@ -5,10 +5,9 @@ import { THEME_TILES_MAP } from "@/constants";
 
 type Props = {
   level: TLevel;
-  image: CanvasImageSource;
 };
 
-const LevelBgTilesLayer = ({ level, image }: Props) => {
+const LevelBgTilesLayer = ({ level }: Props) => {
   const widthWithWalls = level.tilesWidth + 1;
   const heightWithWalls = level.tilesHeight + 1;
 
@@ -35,13 +34,7 @@ const LevelBgTilesLayer = ({ level, image }: Props) => {
                 return null;
 
               return (
-                <MapCell
-                  image={image}
-                  key={x}
-                  x={x}
-                  y={y}
-                  frameCoord={getFrameCoord(x, y)}
-                />
+                <MapCell key={x} x={x} y={y} frameCoord={getFrameCoord(x, y)} />
               );
             })}
           </React.Fragment>

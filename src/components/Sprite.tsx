@@ -1,3 +1,4 @@
+import { useSpriteSheetImgValue } from "@/atoms/spriteSheetImg.atom";
 import { CELL_SIZE } from "@/constants";
 import React, { useEffect, useRef } from "react";
 
@@ -5,13 +6,16 @@ import React, { useEffect, useRef } from "react";
 // export type TFrameCoord = `${number}x${number}`;
 export type TFrameCoord = string;
 
-type Props = {
-  image: CanvasImageSource;
+interface Props {
   frameCoord: TFrameCoord;
   size?: number;
-}; // "XxY" where X and Y are coords
+} // "XxY" where X and Y are coords
 
-const Sprite = ({ image, frameCoord, size = 16 }: Props) => {
+interface SpriteChildProps extends Props {
+  image: CanvasImageSource;
+}
+
+const SpriteChild = ({ frameCoord, size = 16, image }: SpriteChildProps) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
@@ -49,4 +53,11 @@ const Sprite = ({ image, frameCoord, size = 16 }: Props) => {
   return <canvas ref={canvasRef} height={16} width={16} />;
 };
 
-export default React.memo(Sprite);
+const Sprite = (props: Props) => {
+  const image = useSpriteSheetImgValue();
+  if (!image) return null;
+
+  return <SpriteChild {...props} image={image} />;
+};
+
+export default Sprite;
