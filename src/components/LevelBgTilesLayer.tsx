@@ -1,7 +1,7 @@
-import React from "react";
-import MapCell from "./MapCell";
 import { THEME_TILES_MAP } from "@/constants";
 import { TLevel } from "@/types";
+import React from "react";
+import MapCell from "./MapCell";
 
 type Props = {
   level: TLevel;
@@ -25,7 +25,7 @@ const LevelBgTilesLayer = ({ level }: Props) => {
     <div>
       {Array.from({ length: heightWithWalls }).map((_, y) => {
         return (
-          <React.Fragment key={y}>
+          <React.Fragment key={`col-${y}`}>
             {Array.from({ length: widthWithWalls }).map((_, x) => {
               if (
                 (y === widthWithWalls - 1 || y === 0) &&
@@ -34,7 +34,12 @@ const LevelBgTilesLayer = ({ level }: Props) => {
                 return null;
 
               return (
-                <MapCell key={x} x={x} y={y} frameCoord={getFrameCoord(x, y)} />
+                <MapCell
+                  key={`${x}_${y}`}
+                  x={x}
+                  y={y}
+                  frameCoord={getFrameCoord(x, y)}
+                />
               );
             })}
           </React.Fragment>

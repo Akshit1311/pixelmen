@@ -1,19 +1,16 @@
-import React, { useEffect, useState } from "react";
+import LevelState, { TLevelStateData } from "@/classes/LevelState";
 import {
   CELL_SIZE,
   HELPER_OUTLINE,
   LEVEL_THEMES,
   THEME_BACKGROUNDS,
-  TLevelTheme,
 } from "@/constants";
+import { cn } from "@/utils/helpers";
+import React, { useEffect, useState } from "react";
 import LevelBgTilesLayer from "./LevelBgTilesLayer";
 import LevelPlacementsLayer from "./LevelPlacementsLayer";
-import LevelState, { TLevelStateData } from "@/classes/LevelState";
-import { cn } from "@/utils/helpers";
 
-type Props = {};
-
-const RenderLevel = ({}: Props) => {
+const RenderLevel = () => {
   const [level, setLevel] = useState<TLevelStateData | null>(null);
 
   useEffect(() => {
@@ -43,7 +40,7 @@ const RenderLevel = ({}: Props) => {
       <div
         className={cn(
           "h-44 w-44 scale-[2] md:scale-[3] lg:scale-[3.5] xl:scale-[3.75] 2xl:scale-[4]",
-          HELPER_OUTLINE && "outline outline-red-500"
+          HELPER_OUTLINE && "outline outline-red-500",
         )}
       >
         <LevelBgTilesLayer level={level} />

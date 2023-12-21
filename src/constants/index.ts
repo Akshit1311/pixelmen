@@ -3,6 +3,13 @@ export const CELL_SIZE = 16;
 export const SPRITE_SHEET_SRC = "/assets/ciabattas-revenge-sprites.png";
 export const PIXEL_SIZE = 2;
 
+export const PLACEMENT_TYPE_HERO = "HERO";
+export const PLACEMENT_TYPE_GOAL = "GOAL";
+export const PLACEMENT_TYPES = {
+  HERO: "HERO",
+  GOAL: "GOAL",
+} as const;
+
 export const LEVEL_THEMES = {
   YELLOW: "YELLOW",
   BLUE: "BLUE",
@@ -10,8 +17,6 @@ export const LEVEL_THEMES = {
   PINK: "PINK",
   GRAY: "GRAY",
 } as const;
-
-export type TLevelTheme = (typeof LEVEL_THEMES)[keyof typeof LEVEL_THEMES];
 
 export const THEME_BACKGROUNDS = {
   [LEVEL_THEMES.YELLOW]: "#2f2808",

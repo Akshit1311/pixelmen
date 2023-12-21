@@ -43,11 +43,11 @@ const SpriteChild = ({ frameCoord, size = 16, image }: SpriteChildProps) => {
       0, //Where to place this on canvas tag X (0)
       0, //Where to place this on canvas tag Y (0)
       size, //How large to scale it (X)
-      size //How large to scale it (Y)
+      size, //How large to scale it (Y)
     );
   }, [frameCoord, image, size]);
 
-  return <canvas ref={canvasRef} height={16} width={16} />;
+  return <canvas ref={canvasRef} height={size} width={size} />;
 };
 
 const Sprite = (props: Props) => {
