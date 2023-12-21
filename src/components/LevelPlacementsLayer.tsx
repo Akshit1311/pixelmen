@@ -1,7 +1,7 @@
 import React from "react";
-import { TLevel } from "./RenderLevel";
 import { CELL_SIZE } from "@/constants";
 import Sprite from "./Sprite";
+import { TLevel } from "@/types";
 
 type Props = {
   level: TLevel;

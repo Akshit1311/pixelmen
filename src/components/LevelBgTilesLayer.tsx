@@ -1,7 +1,7 @@
 import React from "react";
-import { TLevel } from "./RenderLevel";
 import MapCell from "./MapCell";
 import { THEME_TILES_MAP } from "@/constants";
+import { TLevel } from "@/types";
 
 type Props = {
   level: TLevel;

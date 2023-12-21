@@ -1,6 +1,7 @@
 import React from "react";
-import Sprite, { TFrameCoord } from "./Sprite";
+import Sprite from "./Sprite";
 import { CELL_SIZE } from "@/constants";
+import { TFrameCoord } from "@/types";
 
 type Props = {
   x: number;

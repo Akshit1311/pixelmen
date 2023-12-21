@@ -1,10 +1,7 @@
 import { useSpriteSheetImgValue } from "@/atoms/spriteSheetImg.atom";
 import { CELL_SIZE } from "@/constants";
+import { TFrameCoord } from "@/types";
 import React, { useEffect, useRef } from "react";
-
-// TODO: fix this type
-// export type TFrameCoord = `${number}x${number}`;
-export type TFrameCoord = string;
 
 interface Props {
   frameCoord: TFrameCoord;
