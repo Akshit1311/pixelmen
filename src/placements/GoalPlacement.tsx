@@ -1,6 +1,6 @@
 import { TILES } from "@/constants";
-import Sprite from "../Sprite";
 import { Placement } from "./Placement";
+import Sprite from "@/components/Sprite";
 
 export class GoalPlacement extends Placement {
   renderComponent = () => {

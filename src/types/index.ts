@@ -1,5 +1,5 @@
-import { Placement } from "@/components/Placements/Placement";
 import { LEVEL_THEMES, PLACEMENT_TYPES, TILES } from "@/constants";
+import { Placement } from "@/placements/Placement";
 
 // Derived Types
 export type TTPlacementTypeKey = keyof typeof PLACEMENT_TYPES;

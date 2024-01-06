@@ -2,8 +2,8 @@ import { LEVEL_THEMES, PLACEMENT_TYPES } from "@/constants";
 import { TLevelTheme } from "@/types";
 import GameLoop from "./GameLoop";
 import { DirectionControls } from "./DirectionControls";
-import { placementFactory } from "@/components/Placements/PlacementFactory";
-import { Placement } from "@/components/Placements/Placement";
+import { Placement } from "@/placements/Placement";
+import { placementFactory } from "@/placements/PlacementFactory";
 
 export type TLevelStateData = {
   theme: TLevelTheme;
@@ -50,10 +50,20 @@ export default class LevelState {
   private startGameLoop() {
     this.gameLoop?.stop();
     this.gameLoop = new GameLoop(() => {
-      console.log("A FRAME!");
+      // console.log("A FRAME!");
+      this.tick();
     });
   }
 
+  tick() {
+    // Call 'tick' on any Placement that wants to update
+    for (const placement of this.placements) {
+      placement.tick();
+    }
+
+    // Emit any changes to React
+    this.onEmit(this.getState());
+  }
   destroy() {
     // Tear down the level
     this.gameLoop?.stop();

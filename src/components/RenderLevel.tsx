@@ -15,7 +15,7 @@ const RenderLevel = () => {
 
   useEffect(() => {
     const levelState = new LevelState("1", (data) => {
-      console.log("Level data", data);
+      // console.log("Level data", data);
       setLevel(data);
     });
 
@@ -40,7 +40,7 @@ const RenderLevel = () => {
       <div
         className={cn(
           "h-44 w-44 scale-[2] md:scale-[3] lg:scale-[3.5] xl:scale-[3.75] 2xl:scale-[4]",
-          HELPER_OUTLINE && "outline outline-red-500",
+          HELPER_OUTLINE && "outline outline-red-500"
         )}
       >
         <LevelBgTilesLayer level={level} />

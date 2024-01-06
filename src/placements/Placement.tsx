@@ -20,6 +20,9 @@ export class Placement {
     this.x = config.x;
     this.y = config.y;
   }
+
+  tick() {}
+
   renderComponent: () => null | React.ReactNode = () => {
     return null;
   };
