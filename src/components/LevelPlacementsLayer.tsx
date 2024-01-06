@@ -1,4 +1,3 @@
-import { CELL_SIZE } from "@/constants";
 import { TLevel } from "@/types";
 import React from "react";
 
@@ -8,14 +7,12 @@ type Props = {
 
 const LevelPlacementsLayer = ({ level }: Props) => {
   return level.placements.map((placement, ix) => {
-    const { id, x, y } = placement;
+    const [x, y] = placement.displayXY();
 
-    const xCoord = `${x * CELL_SIZE}px`;
-    const yCoord = `${y * CELL_SIZE}px`;
-    const transform = `translate(${xCoord}, ${yCoord})`;
+    const transform = `translate(${x}px, ${y}px)`;
 
     return (
-      <span key={id} className="absolute" style={{ transform }}>
+      <span key={placement.id} className="absolute" style={{ transform }}>
         {placement.renderComponent()}
       </span>
     );
