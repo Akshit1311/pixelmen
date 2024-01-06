@@ -4,6 +4,7 @@ import GameLoop from "./GameLoop";
 import { DirectionControls } from "./DirectionControls";
 import { Placement } from "@/placements/Placement";
 import { placementFactory } from "@/placements/PlacementFactory";
+import { HeroPlacement } from "@/placements/HeroPlacement";
 
 export type TLevelStateData = {
   theme: TLevelTheme;
@@ -19,6 +20,7 @@ export default class LevelState {
   private placements: Placement[] = [];
   private gameLoop?: GameLoop;
   private directionControls = new DirectionControls();
+  private heroRef?: HeroPlacement;
 
   constructor(
     private levelId: string,
@@ -37,6 +39,13 @@ export default class LevelState {
       { id: 0, x: 2, y: 2, type: PLACEMENT_TYPES.HERO },
       { id: 1, x: 6, y: 4, type: PLACEMENT_TYPES.GOAL },
     ].map((config) => placementFactory.createPlacement(config, this));
+
+    const heroPlacement = this.placements.find(
+      ({ type }) => type === PLACEMENT_TYPES.HERO
+    );
+
+    if (heroPlacement) this.heroRef = heroPlacement as HeroPlacement;
+
     this.startGameLoop();
   }
 
@@ -56,6 +65,11 @@ export default class LevelState {
   }
 
   tick() {
+    //  Check for movement here
+    if (this.directionControls.direction) {
+      this.heroRef?.controllerMoveRequested(this.directionControls.direction);
+    }
+
     // Call 'tick' on any Placement that wants to update
     for (const placement of this.placements) {
       placement.tick();
@@ -67,5 +81,6 @@ export default class LevelState {
   destroy() {
     // Tear down the level
     this.gameLoop?.stop();
+    this.directionControls.unbind();
   }
 }

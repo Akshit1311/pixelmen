@@ -1,4 +1,4 @@
-import { LEVEL_THEMES, PLACEMENT_TYPES, TILES } from "@/constants";
+import { DIRECTIONS, LEVEL_THEMES, PLACEMENT_TYPES, TILES } from "@/constants";
 import { Placement } from "@/placements/Placement";
 
 // Derived Types
@@ -9,6 +9,10 @@ export type TPlacementType = (typeof PLACEMENT_TYPES)[TTPlacementTypeKey];
 export type TTile = (typeof TILES)[keyof typeof TILES];
 
 export type TLevelTheme = (typeof LEVEL_THEMES)[keyof typeof LEVEL_THEMES];
+
+export type TDirectionKey = keyof typeof DIRECTIONS;
+
+export type TDirection = (typeof DIRECTIONS)[keyof typeof DIRECTIONS];
 
 // TODO: fix this type
 // export type TFrameCoord = `${number}x${number}`;

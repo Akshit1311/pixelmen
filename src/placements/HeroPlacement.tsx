@@ -3,21 +3,23 @@ import { Placement, TPlacementConfig } from "./Placement";
 import Sprite from "@/components/Sprite";
 import Hero from "@/components/object-graphics/Hero";
 import LevelState from "@/classes/LevelState";
+import { TDirection } from "@/types";
 
 export class HeroPlacement extends Placement {
-  constructor(config: TPlacementConfig, level: LevelState) {
-    super(config, level);
+  controllerMoveRequested(direction: TDirection) {
+    // Attempt to start moving
+    if (this.movingPixelsRemaining) return;
+
+    // Start the move
     this.movingPixelsRemaining = 16;
-    this.movingPixelDirection = DIRECTIONS.RIGHT;
+    this.movingPixelDirection = direction;
   }
 
-  renderComponent = () => {
-    return <Hero />;
-  };
-
-  tick() {
-    console.log("UPDATE THE HERO!");
-    this.tickMovingPixelProgress();
+  private onDoneMoving() {
+    // Update my x/y
+    const { x, y } = DIRECTION_UPDATE_MAP[this.movingPixelDirection];
+    this.x += x;
+    this.y += y;
   }
 
   protected tickMovingPixelProgress() {
@@ -31,10 +33,12 @@ export class HeroPlacement extends Placement {
     }
   }
 
-  private onDoneMoving() {
-    // Update my x/y
-    const { x, y } = DIRECTION_UPDATE_MAP[this.movingPixelDirection];
-    this.x += x;
-    this.y += y;
+  tick() {
+    console.log("UPDATE THE HERO!");
+    this.tickMovingPixelProgress();
   }
+
+  renderComponent = () => {
+    return <Hero />;
+  };
 }
