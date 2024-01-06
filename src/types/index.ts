@@ -1,3 +1,4 @@
+import { Placement } from "@/components/Placements/Placement";
 import { LEVEL_THEMES, PLACEMENT_TYPES, TILES } from "@/constants";
 
 // Derived Types
@@ -19,7 +20,7 @@ export type TBlock = {
   y: number;
   frameCoord: TFrameCoord;
 };
-export type TPlacement = {
+export type TPlacementConfig = {
   id: number;
   x: number;
   y: number;
@@ -30,5 +31,5 @@ export type TLevel = {
   theme: TLevelTheme;
   tilesHeight: number;
   tilesWidth: number;
-  placements: TPlacement[];
+  placements: Placement[];
 };

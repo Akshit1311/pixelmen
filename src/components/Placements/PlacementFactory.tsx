@@ -1,23 +1,25 @@
-import { PLACEMENT_TYPES, TILES } from "@/constants";
-import React from "react";
-import Sprite from "../Sprite";
+import { PLACEMENT_TYPES } from "@/constants";
+import { Placement, TPlacementConfig } from "./Placement";
+import { HeroPlacement } from "./HeroPlacement";
+import { GoalPlacement } from "./GoalPlacement";
+import { TPlacementType } from "@/types";
+import LevelState from "@/classes/LevelState";
 
-type Props = {
-  type: keyof typeof PLACEMENT_TYPES;
-};
+class PlacementFactory {
+  createPlacement(config: TPlacementConfig, level: LevelState) {
+    const instance = this.getInstance(config, level);
+    // make ID here...
+    return instance;
+  }
 
-const PlacementFactory = ({ type }: Props) => {
-  const PlacementTile = {
-    [PLACEMENT_TYPES.HERO]: { frameCoord: TILES.HERO_RIGHT, size: 32 },
-    [PLACEMENT_TYPES.GOAL]: { frameCoord: TILES.GOAL_DISABLED, size: 16 },
-  };
+  getInstance(config: TPlacementConfig, level: LevelState) {
+    const placementObj: { [key in TPlacementType]: Placement } = {
+      [PLACEMENT_TYPES.HERO]: new HeroPlacement(config, level),
+      [PLACEMENT_TYPES.GOAL]: new GoalPlacement(config, level),
+    };
 
-  return (
-    <Sprite
-      frameCoord={PlacementTile[type].frameCoord}
-      size={PlacementTile[type].size}
-    />
-  );
-};
+    return placementObj[config.type];
+  }
+}
 
-export default PlacementFactory;
+export const placementFactory = new PlacementFactory();

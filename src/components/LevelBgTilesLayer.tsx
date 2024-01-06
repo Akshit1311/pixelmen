@@ -13,6 +13,7 @@ const LevelBgTilesLayer = ({ level }: Props) => {
 
   const tiles = THEME_TILES_MAP[level.theme];
 
+  // code to show walls, that's it - very simple
   const getFrameCoord = (x: number, y: number) => {
     if (x === 0) return tiles.LEFT;
     if (x === widthWithWalls - 1) return tiles.RIGHT;

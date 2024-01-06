@@ -3,11 +3,23 @@ export const CELL_SIZE = 16;
 export const SPRITE_SHEET_SRC = "/assets/ciabattas-revenge-sprites.png";
 export const PIXEL_SIZE = 2;
 
-export const PLACEMENT_TYPE_HERO = "HERO";
-export const PLACEMENT_TYPE_GOAL = "GOAL";
 export const PLACEMENT_TYPES = {
   HERO: "HERO",
   GOAL: "GOAL",
+} as const;
+
+export const DIRECTIONS = {
+  UP: "UP",
+  DOWN: "DOWN",
+  LEFT: "LEFT",
+  RIGHT: "RIGHT",
+} as const;
+
+export const DIRECTION_UPDATE_MAP = {
+  [DIRECTIONS.UP]: { x: 0, y: -1 },
+  [DIRECTIONS.DOWN]: { x: 0, y: 1 },
+  [DIRECTIONS.LEFT]: { x: -1, y: 0 },
+  [DIRECTIONS.RIGHT]: { x: 1, y: 0 },
 } as const;
 
 export const LEVEL_THEMES = {
