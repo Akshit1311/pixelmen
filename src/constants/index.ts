@@ -3,6 +3,19 @@ export const CELL_SIZE = 16;
 export const SPRITE_SHEET_SRC = "/assets/ciabattas-revenge-sprites.png";
 export const PIXEL_SIZE = 2;
 
+export const BODY_SKINS = {
+  NORMAL: "NORMAL",
+  WATER: "WATER",
+  ICE: "ICE",
+  CONVEYOR: "CONVEYOR",
+  FIRE: "FIRE",
+  TELEPORT: "TELEPORT",
+  SCARED: "SCARED",
+};
+
+export const HERO_RUN_1 = "HERO_RUN_1";
+export const HERO_RUN_2 = "HERO_RUN_2";
+
 export const PLACEMENT_TYPES = {
   HERO: "HERO",
   GOAL: "GOAL",

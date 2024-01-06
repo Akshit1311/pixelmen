@@ -14,6 +14,8 @@ export type TDirectionKey = keyof typeof DIRECTIONS;
 
 export type TDirection = (typeof DIRECTIONS)[keyof typeof DIRECTIONS];
 
+export type TFaceDirection = Exclude<TDirection, "DOWN" | "UP">;
+
 // TODO: fix this type
 // export type TFrameCoord = `${number}x${number}`;
 export type TFrameCoord = string;

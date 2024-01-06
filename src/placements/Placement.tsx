@@ -1,6 +1,6 @@
 import LevelState from "@/classes/LevelState";
 import { CELL_SIZE, DIRECTIONS } from "@/constants";
-import { TDirection, TPlacementType } from "@/types";
+import { TDirection, TFaceDirection, TPlacementType } from "@/types";
 
 export type TPlacementConfig = {
   id: number;
@@ -18,6 +18,8 @@ export class Placement {
   protected movingPixelsRemaining = 0;
   protected travelPixelsPerFrame = 1.5;
   protected movingPixelDirection: TDirection = DIRECTIONS.RIGHT;
+  protected spriteFacingDirection: TFaceDirection = DIRECTIONS.RIGHT;
+  protected spriteWalkFrame = 0;
 
   constructor(config: TPlacementConfig, level: LevelState) {
     this.id = config.id;
