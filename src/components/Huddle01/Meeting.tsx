@@ -14,7 +14,7 @@ type Props = {
 const Meeting = ({ roomId, accessToken }: Props) => {
   const { state } = useMeeting(roomId, accessToken);
   const { isVideoOn, enableVideo, disableVideo } = useLocalVideo();
-  const { isAudioOn } = useLocalAudio();
+  const { isAudioOn, enableAudio, disableAudio } = useLocalAudio();
 
   if (state !== "connected") return null;
 
@@ -33,14 +33,18 @@ const Meeting = ({ roomId, accessToken }: Props) => {
         >
           {isVideoOn ? <VideoIcon size={"20"} /> : <VideoOffIcon size={"20"} />}
         </button>
-        <div
+        <button
+          type="button"
           className={cn(
             "aspect-square  p-2 rounded-lg h-10 grid place-items-center cursor-pointer outline-none",
             isAudioOn ? "bg-slate-800" : "bg-red-600"
           )}
+          onClick={() => {
+            isAudioOn ? disableAudio() : enableAudio();
+          }}
         >
           {isAudioOn ? <MicIcon size={"20"} /> : <MicOffIcon size={"20"} />}
-        </div>
+        </button>
       </div>
       <Videos />
     </>

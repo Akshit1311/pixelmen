@@ -1,6 +1,7 @@
 import { useLocalVideo, usePeerIds } from "@huddle01/react/hooks";
 import React, { useEffect, useRef } from "react";
 import RemoteVideo from "./RemoteVideo";
+import RemoteAudio from "./RemoteAudio";
 
 const Video = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -22,6 +23,9 @@ const Video = () => {
 
       {peerIds.map((peerId) => (
         <RemoteVideo key={peerId} peerId={peerId} />
+      ))}
+      {peerIds.map((peerId) => (
+        <RemoteAudio key={peerId} peerId={peerId} />
       ))}
     </div>
   );
