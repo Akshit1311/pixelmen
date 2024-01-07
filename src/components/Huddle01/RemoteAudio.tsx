@@ -1,12 +1,25 @@
-import { useRemoteAudio } from "@huddle01/react/hooks";
-import React, { useRef } from "react";
+import { useDataMessage, useRemoteAudio } from "@huddle01/react/hooks";
+import React, { useEffect, useRef } from "react";
+import { useLevelStateValue } from "@/atoms/levelState.atom";
 
 type Props = {
   peerId: string;
+  index: number;
 };
 
-const RemoteAudio = ({ peerId }: Props) => {
+const RemoteAudio = ({ peerId, index }: Props) => {
   const audioRef = useRef<HTMLAudioElement>(null);
+  const levelState = useLevelStateValue();
+
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
+  useEffect(() => {
+    levelState?.createHeroPlacement(peerId);
+    levelState?.updatePeerHeroPlacementPosition(peerId, index * 2, index * 2);
+
+    return () => {
+      levelState?.deleteHeroPlacement(peerId);
+    };
+  }, [peerId]);
 
   useRemoteAudio({
     peerId,

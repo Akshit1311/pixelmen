@@ -16,16 +16,16 @@ const Video = () => {
   });
 
   return (
-    <div className="absolute z-10 right-0 top-1/2 -translate-y-1/2 bg-blue-500 flex flex-col gap-2">
-      <div className="h-36 aspect-square bg-slate-500 rounded-lg overflow-hidden">
+    <div className="absolute z-10 bottom-2 left-1/2 -translate-x-1/2 flex gap-2">
+      <div className="h-36 aspect-square bg-slate-500/50 rounded-lg overflow-hidden">
         <video ref={videoRef} autoPlay muted className="object-cover h-full" />
       </div>
 
       {peerIds.map((peerId) => (
         <RemoteVideo key={peerId} peerId={peerId} />
       ))}
-      {peerIds.map((peerId) => (
-        <RemoteAudio key={peerId} peerId={peerId} />
+      {peerIds.map((peerId, i) => (
+        <RemoteAudio key={peerId} peerId={peerId} index={i} />
       ))}
     </div>
   );

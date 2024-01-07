@@ -99,7 +99,11 @@ export class HeroPlacement extends Placement {
 
   renderComponent = () => {
     return (
-      <Hero frameCoord={this.getFrame()} yTranslate={this.getYTranslate()} />
+      <Hero
+        frameCoord={this.getFrame()}
+        yTranslate={this.getYTranslate()}
+        peerId={this.id}
+      />
     );
   };
 }

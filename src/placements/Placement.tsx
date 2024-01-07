@@ -3,14 +3,14 @@ import { CELL_SIZE, DIRECTIONS } from "@/constants";
 import { TDirection, TFaceDirection, TPlacementType } from "@/types";
 
 export type TPlacementConfig = {
-  id: number;
+  id: string;
   type: TPlacementType;
   x: number;
   y: number;
 };
 
 export class Placement {
-  id = 0;
+  id = "0";
   type = "";
   x = 0;
   y = 0;

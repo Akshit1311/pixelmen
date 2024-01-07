@@ -8,7 +8,7 @@ const huddleClient = new HuddleClient({
   projectId: process.env.NEXT_PUBLIC_HUDDLE_PROJECT_ID || "",
   options: {
     activeSpeakers: {
-      size: 8,
+      size: 16,
     },
   },
 });

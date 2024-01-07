@@ -17,7 +17,7 @@ export default class LevelState {
   private theme: TLevelTheme = LEVEL_THEMES.YELLOW;
   private tilesWidth = 8;
   private tilesHeight = 8;
-  private placements: Placement[] = [];
+  public placements: Placement[] = []; // temp public
   private gameLoop?: GameLoop;
   private directionControls = new DirectionControls();
   private heroRef?: HeroPlacement;
@@ -33,11 +33,13 @@ export default class LevelState {
   // Can be deprecated
   private start() {
     this.theme = LEVEL_THEMES.BLUE;
-    this.tilesWidth = 8;
-    this.tilesHeight = 8;
+    this.tilesWidth = 10;
+    this.tilesHeight = 10;
+    // this.tilesWidth = 19;
+    // this.tilesHeight = 8;
     this.placements = [
-      { id: 0, x: 2, y: 2, type: PLACEMENT_TYPES.HERO },
-      { id: 1, x: 6, y: 4, type: PLACEMENT_TYPES.GOAL },
+      { id: "0", x: 5, y: 5, type: PLACEMENT_TYPES.HERO },
+      // { id: "1", x: 6, y: 4, type: PLACEMENT_TYPES.GOAL },
     ].map((config) => placementFactory.createPlacement(config, this));
 
     const heroPlacement = this.placements.find(
@@ -63,6 +65,29 @@ export default class LevelState {
       this.tick();
     });
   }
+
+  createHeroPlacement = (peerId: string) => {
+    const heroPlacement = placementFactory.createPlacement(
+      { id: peerId, x: 2, y: 2, type: PLACEMENT_TYPES.HERO },
+      this
+    );
+
+    this.placements.push(heroPlacement);
+    this.onEmit(this.getState());
+  };
+  deleteHeroPlacement = (peerId: string) => {
+    this.placements = this.placements.filter(({ id }) => id !== peerId);
+    this.onEmit(this.getState());
+  };
+
+  updatePeerHeroPlacementPosition = (peerId: string, x: number, y: number) => {
+    const currentHero = this.placements.find(({ id }) => id === peerId);
+
+    if (currentHero) {
+      currentHero.x = x;
+      currentHero.y = y;
+    }
+  };
 
   tick() {
     //  Check for movement here

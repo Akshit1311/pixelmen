@@ -1,13 +1,11 @@
 import { useEffect, useRef } from "react";
-import { useRoom } from "@huddle01/react/hooks";
+import { usePeerIds, useRoom } from "@huddle01/react/hooks";
 
 const useMeeting = (roomId: string, accessToken: string) => {
   const isLoading = useRef(false);
 
   const { joinRoom, leaveRoom, state } = useRoom({
-    onJoin: () => {
-      console.log("Joined the room");
-    },
+    onJoin: () => {},
     onLeave: () => {
       console.log("Left the room");
     },

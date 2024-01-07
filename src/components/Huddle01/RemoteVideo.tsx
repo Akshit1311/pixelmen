@@ -18,7 +18,7 @@ const RemoteVideo = ({ peerId }: Props) => {
   });
 
   return (
-    <div className="h-36 aspect-square bg-slate-500 rounded-lg overflow-hidden">
+    <div className="h-36 aspect-square bg-slate-500/70 rounded-lg overflow-hidden">
       <video ref={videoRef} autoPlay muted className="object-cover h-full" />
     </div>
   );
