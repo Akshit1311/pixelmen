@@ -1,6 +1,10 @@
 "use client";
 import useMeeting from "@/hooks/useMeeting";
 import React from "react";
+import { VideoIcon, VideoOffIcon, MicOffIcon, MicIcon } from "lucide-react";
+import { useLocalAudio, useLocalVideo } from "@huddle01/react/hooks";
+import { cn } from "@/utils/helpers";
+import Videos from "./Videos";
 
 type Props = {
   roomId: string;
@@ -8,9 +12,39 @@ type Props = {
 };
 
 const Meeting = ({ roomId, accessToken }: Props) => {
-  useMeeting(roomId, accessToken);
+  const { state } = useMeeting(roomId, accessToken);
+  const { isVideoOn, enableVideo, disableVideo } = useLocalVideo();
+  const { isAudioOn } = useLocalAudio();
 
-  return null;
+  if (state !== "connected") return null;
+
+  return (
+    <>
+      <div className="absolute bg-slate-500 p-2 rounded-lg z-10 bottom-10 left-1/2 -translate-x-1/2 flex gap-2">
+        <button
+          type="button"
+          className={cn(
+            "aspect-square h-10  p-2 rounded-lg grid place-items-center cursor-pointer outline-none",
+            isVideoOn ? "bg-slate-800" : "bg-red-600"
+          )}
+          onClick={() => {
+            isVideoOn ? disableVideo() : enableVideo();
+          }}
+        >
+          {isVideoOn ? <VideoIcon size={"20"} /> : <VideoOffIcon size={"20"} />}
+        </button>
+        <div
+          className={cn(
+            "aspect-square  p-2 rounded-lg h-10 grid place-items-center cursor-pointer outline-none",
+            isAudioOn ? "bg-slate-800" : "bg-red-600"
+          )}
+        >
+          {isAudioOn ? <MicIcon size={"20"} /> : <MicOffIcon size={"20"} />}
+        </div>
+      </div>
+      <Videos />
+    </>
+  );
 };
 
 export default React.memo(Meeting);

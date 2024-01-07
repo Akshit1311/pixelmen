@@ -4,7 +4,6 @@ import "./globals.css";
 
 // huddle01
 import HuddleWrapper from "@/wrappers/HuddleWrapper";
-import { getAccessToken } from "@/utils/getAccessToken";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,10 +17,6 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  // const accessToken = await getAccessToken("xtm-xxbk-ikg");
-
-  // console.log("accessToken", accessToken);
-
   return (
     <html lang="en">
       <body className={inter.className}>

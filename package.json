@@ -12,12 +12,13 @@
     "fix": "biome check --apply ./"
   },
   "dependencies": {
-    "clsx": "^2.0.0",
+    "clsx": "^2.1.0",
     "jotai": "^2.6.0",
+    "lucide-react": "^0.307.0",
     "next": "14.0.4",
     "react": "^18",
     "react-dom": "^18",
-    "tailwind-merge": "^2.1.0",
+    "tailwind-merge": "^2.2.0",
     "zod": "^3.22.4"
   },
   "devDependencies": {

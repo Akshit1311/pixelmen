@@ -17,3 +17,6 @@ export default async function Home({ params: { roomId } }: TParams) {
     </>
   );
 }
+
+// Otherwise, get cached access token
+export const dynamic = "force-dynamic";

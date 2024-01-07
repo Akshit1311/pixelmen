@@ -28,6 +28,8 @@ const useMeeting = (roomId: string, accessToken: string) => {
       });
     }
   }, []);
+
+  return { state };
 };
 
 export default useMeeting;
