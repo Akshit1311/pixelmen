@@ -38,7 +38,7 @@ export default class LevelState {
     // this.tilesWidth = 19;
     // this.tilesHeight = 8;
     this.placements = [
-      { id: "0", x: 5, y: 5, type: PLACEMENT_TYPES.HERO },
+      { id: "0", x: 0, y: 0, type: PLACEMENT_TYPES.HERO },
       // { id: "1", x: 6, y: 4, type: PLACEMENT_TYPES.GOAL },
     ].map((config) => placementFactory.createPlacement(config, this));
 

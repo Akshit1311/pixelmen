@@ -58,7 +58,7 @@ const Meeting = ({ roomId, accessToken }: Props) => {
           className={cn(
             "aspect-square  p-2 rounded-lg h-10 bg-slate-800 grid place-items-center cursor-pointer outline-none"
           )}
-          onClick={() => levelState?.updatePeerHeroPlacementPosition("0", 5, 5)}
+          onClick={() => levelState?.updatePeerHeroPlacementPosition("0", 0, 0)}
         >
           <ArrowBigDown size={"20"} />
         </button>

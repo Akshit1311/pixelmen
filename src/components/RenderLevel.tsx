@@ -7,7 +7,7 @@ import {
 } from "@/constants";
 import { cn } from "@/utils/helpers";
 import React, { useEffect, useState } from "react";
-import LevelBgTilesLayer from "./LevelBgTilesLayer";
+// import LevelBgTilesLayer from "./LevelBgTilesLayer";
 import LevelPlacementsLayer from "./LevelPlacementsLayer";
 import { useLocalPeer, useRoom } from "@huddle01/react/hooks";
 import { useSetLevelState } from "@/atoms/levelState.atom";
@@ -45,8 +45,8 @@ const RenderLevel = () => {
       {/* Game Screen */}
       <div
         className={cn(
-          "h-44 w-44 scale-[2] md:scale-[3] lg:scale-[3.5] xl:scale-[3.75] 2xl:scale-[4]"
-          // HELPER_OUTLINE && "outline outline-red-500"
+          " scale-[2] md:scale-[3] lg:scale-[3.5] xl:scale-[3.75] 2xl:scale-[4]",
+          HELPER_OUTLINE && "outline outline-red-500"
         )}
       >
         {/* <LevelBgTilesLayer level={level} /> */}

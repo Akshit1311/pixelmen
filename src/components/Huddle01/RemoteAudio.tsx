@@ -14,7 +14,7 @@ const RemoteAudio = ({ peerId, index }: Props) => {
   // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
     levelState?.createHeroPlacement(peerId);
-    levelState?.updatePeerHeroPlacementPosition(peerId, index * 2, index * 2);
+    levelState?.updatePeerHeroPlacementPosition(peerId, -8 + index * 2, 0);
 
     return () => {
       levelState?.deleteHeroPlacement(peerId);
