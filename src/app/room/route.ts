@@ -9,4 +9,4 @@ export async function GET(request: Request) {
 }
 
 // Uncomment to stop getting cached result
-// export const dynamic = "force-dynamic";
+export const dynamic = "force-dynamic";

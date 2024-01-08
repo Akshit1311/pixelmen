@@ -38,7 +38,7 @@ const RemotePeerDisplayName = ({ peerId }: { peerId: string }) => {
         {metadata?.displayName || `Guest ${peerId.slice(7, 12)}`} -{" "}
         {nodeValue.toFixed(1)}
       </div>
-      <div className="flex absolute left-1/2 -translate-x-1/2 ">
+      <div className=" hidden absolute left-1/2 -translate-x-1/2 ">
         <button
           type="button"
           className={cn(
