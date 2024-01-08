@@ -3,6 +3,11 @@ import Sprite from "../Sprite";
 import { TILES } from "@/constants";
 import { useLocalPeer, useRemotePeer } from "@huddle01/react/hooks";
 import { cn } from "@/utils/helpers";
+import { ArrowBigRight, ArrowBigLeft } from "lucide-react";
+import {
+  usePeerAudioNodeValue,
+  useSetPeerAudioNode,
+} from "@/atoms/peerAudioNode.atom";
 
 type THeroProps = {
   peerId: string;
@@ -12,7 +17,49 @@ type THeroProps = {
 
 const RemotePeerDisplayName = ({ peerId }: { peerId: string }) => {
   const { metadata } = useRemotePeer<{ displayName: string }>({ peerId });
-  return metadata?.displayName || `Guest ${peerId.slice(7, 12)}`;
+  const peerAudioNode = usePeerAudioNodeValue();
+
+  return (
+    <>
+      <div
+        className={cn(
+          "absolute -top-[.85rem] text-[3.5px] font-medium left-1/2 -translate-x-1/2 w-fit whitespace-nowrap"
+        )}
+      >
+        {metadata?.displayName || `Guest ${peerId.slice(7, 12)}`}
+      </div>
+      <div className="flex absolute left-1/2 -translate-x-1/2 ">
+        <button
+          type="button"
+          className={cn(
+            "aspect-square  p-1 rounded-lg  bg-slate-800 grid place-items-center cursor-pointer outline-none"
+          )}
+          onClick={() => {
+            console.log({ peerAudioNode, peerId });
+
+            if (peerAudioNode[peerId].pan.value > -1)
+              peerAudioNode[peerId].pan.value -= 0.1;
+          }}
+        >
+          <ArrowBigLeft size={"5"} />
+        </button>
+        <button
+          type="button"
+          className={cn(
+            "aspect-square  p-1 rounded-lg  bg-slate-800 grid place-items-center cursor-pointer outline-none"
+          )}
+          onClick={() => {
+            console.log({ peerAudioNode });
+
+            if (peerAudioNode[peerId].pan.value < 1)
+              peerAudioNode[peerId].pan.value += 0.1;
+          }}
+        >
+          <ArrowBigRight size={"5"} />
+        </button>
+      </div>
+    </>
+  );
 };
 
 const Hero = ({ frameCoord, yTranslate, peerId }: THeroProps) => {
@@ -34,18 +81,18 @@ const Hero = ({ frameCoord, yTranslate, peerId }: THeroProps) => {
         <Sprite frameCoord={frameCoord} size={32} />
       </div>
 
-      <div
-        className={cn(
-          "absolute -bottom-[.3rem] text-[3.5px] font-medium left-1/2 -translate-x-1/2 w-fit whitespace-nowrap",
-          peerId === "0" && "text-lime-400"
-        )}
-      >
-        {peerId === "0" ? (
-          metadata?.displayName || "Guest"
-        ) : (
-          <RemotePeerDisplayName peerId={peerId} />
-        )}
-      </div>
+      {peerId === "0" ? (
+        <div
+          className={cn(
+            "absolute -top-[.85rem] text-[3.5px] font-medium left-1/2 -translate-x-1/2 w-fit whitespace-nowrap",
+            peerId === "0" && "text-lime-400"
+          )}
+        >
+          {metadata?.displayName || "Guest"}
+        </div>
+      ) : (
+        <RemotePeerDisplayName peerId={peerId} />
+      )}
     </div>
   );
 };

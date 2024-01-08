@@ -1,4 +1,4 @@
-import { useRemoteVideo } from "@huddle01/react/hooks";
+import { useRemotePeer, useRemoteVideo } from "@huddle01/react/hooks";
 import React, { useRef } from "react";
 
 type Props = {
@@ -17,9 +17,16 @@ const RemoteVideo = ({ peerId }: Props) => {
     },
   });
 
+  const { metadata } = useRemotePeer<{ displayName: string }>({ peerId });
+
   return (
-    <div className="h-36 aspect-square bg-slate-500/70 rounded-lg overflow-hidden">
-      <video ref={videoRef} autoPlay muted className="object-cover h-full" />
+    <div className="relative">
+      <div className=" h-36 aspect-square bg-slate-500/70 rounded-lg overflow-hidden">
+        <video ref={videoRef} autoPlay muted className="object-cover h-full" />
+      </div>
+      <div className="left-1/2 -translate-x-1/2  whitespace-nowrap absolute -top-8">
+        {metadata?.displayName || `Guest ${peerId.slice(7, 12)}`}
+      </div>
     </div>
   );
 };

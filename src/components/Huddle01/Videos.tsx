@@ -1,5 +1,5 @@
 import { useLocalVideo, usePeerIds } from "@huddle01/react/hooks";
-import React, { useEffect, useRef } from "react";
+import React, { useRef } from "react";
 import RemoteVideo from "./RemoteVideo";
 import RemoteAudio from "./RemoteAudio";
 
@@ -17,8 +17,18 @@ const Video = () => {
 
   return (
     <div className="absolute z-10 bottom-2 left-1/2 -translate-x-1/2 flex gap-2">
-      <div className="h-36 aspect-square bg-slate-500/50 rounded-lg overflow-hidden">
-        <video ref={videoRef} autoPlay muted className="object-cover h-full" />
+      <div className="relative">
+        <div className="h-36 aspect-square bg-slate-500/50 rounded-lg overflow-hidden">
+          <video
+            ref={videoRef}
+            autoPlay
+            muted
+            className="object-cover h-full"
+          />
+        </div>
+        <div className="left-1/2 -translate-x-1/2  whitespace-nowrap absolute -top-8">
+          me
+        </div>
       </div>
 
       {peerIds.map((peerId) => (
