@@ -1,5 +1,5 @@
 import LevelState from "@/classes/LevelState";
-import { CELL_SIZE, DIRECTIONS } from "@/constants";
+import { CELL_SIZE, DIRECTIONS, PLACEMENT_TYPES } from "@/constants";
 import { TDirection, TFaceDirection, TPlacementType } from "@/types";
 
 export type TPlacementConfig = {
@@ -11,7 +11,7 @@ export type TPlacementConfig = {
 
 export class Placement {
   id = "0";
-  type = "";
+  type: TPlacementType = PLACEMENT_TYPES.HERO;
   x = 0;
   y = 0;
 

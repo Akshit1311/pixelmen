@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Sprite from "../Sprite";
 import { TILES } from "@/constants";
 import { useLocalPeer, useRemotePeer } from "@huddle01/react/hooks";
@@ -19,6 +19,15 @@ const RemotePeerDisplayName = ({ peerId }: { peerId: string }) => {
   const { metadata } = useRemotePeer<{ displayName: string }>({ peerId });
   const peerAudioNode = usePeerAudioNodeValue();
 
+  const [nodeValue, setNodeValue] = useState(
+    peerAudioNode[peerId]?.pan.value || 0
+  );
+
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
+  useEffect(() => {
+    setNodeValue(peerAudioNode[peerId]?.pan.value || 0);
+  }, [peerAudioNode[peerId]?.pan.value]);
+
   return (
     <>
       <div
@@ -26,7 +35,8 @@ const RemotePeerDisplayName = ({ peerId }: { peerId: string }) => {
           "absolute -top-[.85rem] text-[3.5px] font-medium left-1/2 -translate-x-1/2 w-fit whitespace-nowrap"
         )}
       >
-        {metadata?.displayName || `Guest ${peerId.slice(7, 12)}`}
+        {metadata?.displayName || `Guest ${peerId.slice(7, 12)}`} -{" "}
+        {nodeValue.toFixed(1)}
       </div>
       <div className="flex absolute left-1/2 -translate-x-1/2 ">
         <button
@@ -37,7 +47,7 @@ const RemotePeerDisplayName = ({ peerId }: { peerId: string }) => {
           onClick={() => {
             console.log({ peerAudioNode, peerId });
 
-            if (peerAudioNode[peerId].pan.value > -1)
+            if (peerAudioNode[peerId]?.pan.value > -1)
               peerAudioNode[peerId].pan.value -= 0.1;
           }}
         >
@@ -51,7 +61,7 @@ const RemotePeerDisplayName = ({ peerId }: { peerId: string }) => {
           onClick={() => {
             console.log({ peerAudioNode });
 
-            if (peerAudioNode[peerId].pan.value < 1)
+            if (peerAudioNode[peerId]?.pan.value < 1)
               peerAudioNode[peerId].pan.value += 0.1;
           }}
         >
